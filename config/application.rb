@@ -42,5 +42,7 @@ module SnsApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = false
     config.i18n.default_locale = :ja
+    config.action_controller.raise_on_missing_callback_actions = false
+
   end
 end

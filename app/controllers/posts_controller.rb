@@ -1,17 +1,25 @@
 class PostsController < ApplicationController
-  def create
-    post = Post.new(post_params)
+  def index
+    @posts = Post.all
 
-    if post.save
-      render json: { post: post }, status: :created
+    render json: @posts, status: :ok
+  end
+
+  def create
+    # current_user.id を使って、ユーザーIDを設定
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id  # ユーザーIDを明示的に設定
+
+    if @post.save
+      render json: @post, status: :created
     else
-      render json: { error: "投稿の作成に失敗しました" }, status: :unprocessable_entity
+      render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   private
 
   def post_params
-    params.require(:content)
+    params.require(:post).permit(:content)
   end
 end

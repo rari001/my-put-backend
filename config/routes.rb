@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   # # 他のルート設定
   # get "up" => "rails/health#show", as: :rails_health_check
   # # root "posts#index" などの他のルート設定
-  resources :posts, only: [:create]
+  resources :posts, only: [:create, :index]
   resources :uploads, only: [:create]
 end

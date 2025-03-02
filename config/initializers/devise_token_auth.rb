@@ -44,10 +44,10 @@ DeviseTokenAuth.setup do |config|
   # Makes it possible to change the headers names
   # config.headers_names = {
   #   :'authorization' => 'Authorization',
-  #   :'access-token' => 'access-token',
-  #   :'client' => 'client',
+  #   :'access-token' => '_access_token',
+  #   :'client' => '_client',
   #   :'expiry' => 'expiry',
-  #   :'uid' => 'uid',
+  #   :'uid' => '_uid',
   #   :'token-type' => 'token-type'
   # }
 
