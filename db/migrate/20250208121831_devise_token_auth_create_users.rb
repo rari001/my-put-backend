@@ -33,6 +33,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[7.1]
       t.string :nickname
       t.string :image
       t.string :email
+      t.string :username, null: false, default: ""
 
       ## Tokens
       t.json :tokens
@@ -44,6 +45,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[7.1]
     add_index :users, [:uid, :provider],     unique: true
     add_index :users, :reset_password_token, unique: true
     add_index :users, :confirmation_token,   unique: true
+    add_index :users, :username, unique: true
     # add_index :users, :unlock_token,         unique: true
   end
 end

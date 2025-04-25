@@ -1,19 +1,38 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
-
-    render json: @posts, status: :ok
+    posts = Post.includes(:user).order(created_at: :desc)
+    render json: posts.map { |post| post_data(post) }, status: :ok
   end
 
   def create
-    # current_user.id を使って、ユーザーIDを設定
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id  # ユーザーIDを明示的に設定
+    return render json: { error: "Unauthorized" }, status: :unauthorized unless current_user
 
-    if @post.save
-      render json: @post, status: :created
+    post = current_user.posts.build(post_params)
+
+    if post.save
+      render json: post_data(post), status: :created
     else
-      render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: post.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    post = current_user.posts.find_by(id: params[:id])
+
+    if post.update(post_params)
+      render json: post_data(post), status: :ok
+    else
+      render json: { errors: post.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    post = current_user.posts.find_by(id: params[:id])
+
+    if post.destroy
+      render json: { message: "Post deleted successfully" }, status: :ok
+    else
+      render json: { errors: post.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -21,5 +40,19 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:content)
+  end
+
+  def post_data(post)
+    {
+      id: post.id,
+      content: post.content,
+      createdAt: post.created_at.strftime("%Y/%-m/%-d"),
+      updatedAt: post.updated_at.strftime("%Y/%-m/%-d"),
+      userId: post.user_id,
+      userName: post.user&.name,
+      userUserName: post.user.username,
+      userEmail: post.user.email,
+      userAvatarUrl: post&.user&.profile&.avatar&.attached? ? url_for(post&.user&.profile&.avatar) : nil
+    }
   end
 end
