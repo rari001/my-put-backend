@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
     posts = Post.includes(:user).order(created_at: :desc)
+    posts = posts.where(learn: true) if params[:learn] == "true"
     render json: posts.map { |post| post_data(post) }, status: :ok
   end
 
@@ -39,20 +40,47 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :learn)
   end
 
   def post_data(post)
     {
       id: post.id,
       content: post.content,
-      createdAt: post.created_at.strftime("%Y/%-m/%-d"),
-      updatedAt: post.updated_at.strftime("%Y/%-m/%-d"),
+      learn: post.learn,
+      createdAt: format_post_time(post.created_at),
+      updatedAt: format_post_time(post.updated_at),
       userId: post.user_id,
       userName: post.user&.name,
       userUserName: post.user.username,
       userEmail: post.user.email,
       userAvatarUrl: post&.user&.profile&.avatar&.attached? ? url_for(post&.user&.profile&.avatar) : nil
     }
+  end
+
+  # 日付フォーマットを制御する
+  def format_post_time(time)
+    return "" unless time.is_a?(Time) || time.is_a?(DateTime)
+
+    if time.to_date == Date.today
+      format_time(time) # 今日の投稿は時間で表示
+    else
+      time.strftime("%Y/%-m/%-d") # 昨日以降は日付で表示
+    end
+  end
+
+ # 時間のフォーマット
+  def format_time(time)
+    time_in_zone = time.in_time_zone
+    time_diff = Time.current - time_in_zone
+    if time_diff < 60
+      "#{time_diff.to_i}秒前"
+    elsif time_diff < 3600
+      "#{(time_diff / 60).to_i}分前"
+    elsif time_diff < 86400
+      "#{(time_diff / 3600).to_i}時間前"
+    else
+      "#{(time_diff / 86400).to_i}日前"
+    end
   end
 end

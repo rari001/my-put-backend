@@ -18,6 +18,7 @@ class ProfileUsersController < ApplicationController
       post: user.posts.order(created_at: :desc).map do |post| {
         id: post.id,
         content: post.content,
+        learn: post.learn,
         createdAt: post.created_at.strftime("%Y/%-m/%-d"),
         updatedAt: post.updated_at.strftime("%Y/%-m/%-d"),
         userId: post.user_id,
