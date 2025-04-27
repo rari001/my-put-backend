@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
-    render file: Rails.root.join('dist', 'index.html')
+    # Reactのビルドされたindex.htmlを返す
+    render file: Rails.root.join('dist', 'index.html'), layout: false
   end
 end

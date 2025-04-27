@@ -35,5 +35,7 @@ Rails.application.routes.draw do
     get :follow_status, to: 'relationships#follow_status'
   end
 
+  get '*path', to: 'home#index', constraints: ->(req) { !req.xhr? && req.format.html? }
+
   root to: 'home#index'
 end
