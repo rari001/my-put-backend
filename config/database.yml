@@ -79,6 +79,4 @@ test:
 #
 production:
   <<: *default
-  database: sns_api_production
-  username: sns_api
-  password: <%= ENV["SNS_API_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
