@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   def index
-    # Reactのビルドされたindex.htmlを返す
-    render file: 'public/index.html', layout: false
+    render json: { message: 'Welcome to TechPut API!!' }, status: :ok
   end
 end

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'home/index'
   # 他の認証機能を 'auth' プレフィックスで設定（メール・パスワード認証）
   mount_devise_token_auth_for 'User', at: 'auth'
 
@@ -34,8 +33,6 @@ Rails.application.routes.draw do
     get :followers, to: 'relationships#followers'
     get :follow_status, to: 'relationships#follow_status'
   end
-
-  get '*path', to: 'home#index', constraints: ->(req) { !req.xhr? && req.format.html? }
 
   root to: 'home#index'
 end
