@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
+  get 'home/index'
   # 他の認証機能を 'auth' プレフィックスで設定（メール・パスワード認証）
   mount_devise_token_auth_for 'User', at: 'auth'
 
-  # 他のルート設定
+  # # 他のルート設定
   # get "up" => "rails/health#show", as: :rails_health_check
-  # root "posts#index" などの他のルート設定
+  # # root "posts#index" などの他のルート設定
   resources :posts, only: [:create, :index, :update, :destroy] do
     resources :comments, only: [:index, :create, :update, :destroy]
     resource :like, only: [:index, :create, :destroy]
@@ -18,7 +19,6 @@ Rails.application.routes.draw do
   resource :profile, only: [:show, :update]
   get 'users/:id', to: 'profile_users#show', as: :user_profile
   get '/search', to: 'search#index'
-
   # 通知に関連するルーティング
   resources :notifications, only: [:index] do
     collection do
@@ -35,6 +35,5 @@ Rails.application.routes.draw do
     get :follow_status, to: 'relationships#follow_status'
   end
 
-  # Reactのクライアントサイドのルーティングに対応するために追加
-  get '*path', to: 'application#frontend', constraints: ->(req) { !req.xhr? && req.format.html? }
+  root to: 'home#index'
 end
