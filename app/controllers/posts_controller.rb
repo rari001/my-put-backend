@@ -61,11 +61,11 @@ class PostsController < ApplicationController
   # 日付フォーマットを制御する
   def format_post_time(time)
     return "" unless time.is_a?(Time) || time.is_a?(DateTime)
-
-    if time.to_date == Date.today
-      format_time(time) # 今日の投稿は時間で表示
+    local_time = time.in_time_zone # ← タイムゾーン補正
+    if local_time.to_date == Time.current.to_date
+      format_time(local_time)
     else
-      time.strftime("%Y/%-m/%-d") # 昨日以降は日付で表示
+      local_time.strftime("%Y/%-m/%-d")
     end
   end
 
