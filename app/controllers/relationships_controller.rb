@@ -14,26 +14,40 @@ class RelationshipsController < ApplicationController
   end
 
   # フォロー
-  def create
-    # 既にフォロー関係が存在するかを確認
-    if current_user.following_relationships.exists?(following_id: @user.id)
-      render json: { message: "Already following" }, status: :unprocessable_entity
-    else
-      # フォロー関係を作成
-      follow_create = current_user.following_relationships.create(following_id: @user.id)
+def create
+  if current_user.following_relationships.exists?(following_id: @user.id)
+    render json: { message: "Already following" }, status: :unprocessable_entity
+  else
+    follow_create = current_user.following_relationships.create(following_id: @user.id)
 
-      if follow_create.persisted?  # 作成が成功したかどうかを確認
-        render json: {
-          message: "User followed",
-          isFollowed: true,
-          followingsCount: @user.followings.count,
-          followersCount: @user.followers.count
-        }, status: :created
-      else
-        render json: { message: "Unable to follow user" }, status: :unprocessable_entity
+    if follow_create.persisted?
+      # 自分以外のユーザーに通知を送る
+      if @user != current_user
+        notification_message = if current_user.email.present?
+                                 "#{current_user.name.presence || current_user.email.split('@').first} さんがあなたをフォローしました。"
+                               else
+                                 "#{current_user.name} さんがあなたをフォローしました。"
+                               end
+
+        Notification.create(
+          user: @user,                # 通知を受け取るユーザー（フォローされた側）
+          relationship_id: follow_create.id,  # 通知に関連するフォロー関係（必要に応じて）
+          message: notification_message
+        )
       end
+
+      render json: {
+        message: "User followed",
+        isFollowed: true,
+        followingsCount: @user.followings.count,
+        followersCount: @user.followers.count
+      }, status: :created
+    else
+      render json: { message: "Unable to follow user" }, status: :unprocessable_entity
     end
   end
+end
+
 
   # アンフォロー
   def destroy

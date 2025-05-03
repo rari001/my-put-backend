@@ -17,7 +17,7 @@ class NotificationsController < ApplicationController
         read: notification.read,
         createdAt: format_time(notification.created_at),
         commentContent: notification.comment&.content, # コメント内容
-        postId: notification.post.id, # 通知が関連する投稿のID
+        postId: notification.post&.id, # 通知が関連する投稿のID
         commentId: notification.comment&.id, # コメントID
         mentionedUserId: notification.user.id, # メンションされたユーザーID
         mentionedUserName: notification.user.name, # メンションされたユーザー名
