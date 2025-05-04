@@ -17,6 +17,7 @@ class StocksController < ApplicationController
         updatedAt: post.updated_at.strftime("%Y/%-m/%-d"),
         userId: post.user_id,
         userName: post.user&.name,
+        userUserName: post.user&.username,
         userEmail: post.user&.email,
         userAvatarUrl: post&.user&.profile&.avatar&.attached? ? url_for(post&.user&.profile&.avatar) : nil
       }

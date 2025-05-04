@@ -26,10 +26,19 @@ class NotificationsController < ApplicationController
         senderEmail: notification.comment&.user&.email, # メンションを送ったユーザーのメール
         senderUserName: notification.comment&.user&.username,# メンションを送ったユーザーのメユーザー名
         senderUserAvatarUrl: notification.comment&.user&.profile&.avatar&.attached? ? url_for(notification.comment&.user&.profile&.avatar) : nil,
+        # いいねに関する
         likeId: notification.like&.id, # likeが関連していればそのID
-        likeUserId: notification.like&.user_id, # likeしたユーザーのID
+        likeUserId: notification.like&.user&.id, # likeしたユーザーのID
         likeCreatedAt: notification.like&.created_at, # likeが作成された日時
-        likeSenderName: notification.like&.user&.name.presence || notification.like&.user&.email&.split('@')&.first, # likeしたユーザー名
+        likeSenderName: notification.like&.user&.name.presence || notification.like&.user&.email&.split('@')&.first,
+        likeSenderUserName: notification.like&.user&.username,
+        likeSenderAvatarUrl: notification.like&.user&.profile&.avatar&.attached? ? url_for(notification.like&.user&.profile&.avatar) : nil,
+        # フォローに関する
+        relationId: notification.relationship&.id,
+        followSenderId: notification.relationship&.follower&.id,
+        followSenderName: notification.relationship&.follower&.name.presence || notification.relationship&.follower&.email&.split('@')&.first,
+        followSenderUserName: notification.relationship&.follower&.username,
+        followSenderAvatarUrl: notification.relationship&.follower&.profile&.avatar&.attached? ? url_for(notification.relationship&.follower&.profile&.avatar) : nil,
       }
     }, status: :ok
   end
