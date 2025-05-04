@@ -1,11 +1,11 @@
 class TopUsersController < ApplicationController
   def index
     # フォロワー数が多い順にUserを取得
-    top_followers = User.joins(:follower_relationships)
-                        .select('users.*, COUNT(relationships.id) AS followers_count')
-                        .group('users.id')
-                        .order('followers_count DESC')
-                        .limit(3)
+    top_followers = User.left_joins(:follower_relationships)
+                    .select('users.*, COUNT(relationships.id) AS followers_count')
+                    .group('users.id')
+                    .order('followers_count DESC')
+                    .limit(3)
 
     # 3人未満なら、いいね数が多いユーザーを代わりに取得
     if top_followers.length < 3
