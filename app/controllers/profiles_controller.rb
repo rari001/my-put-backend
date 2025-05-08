@@ -27,7 +27,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:bio, :avatar)
+    params.require(:profile).permit(:bio, :avatar, :github_url)
   end
 
   def profile_data(profile)
@@ -46,6 +46,7 @@ class ProfilesController < ApplicationController
       email: user.email,
       bio: profile.bio,
       avatarUrl: profile.avatar.attached? ? url_for(profile.avatar) : nil,
+      githubUrl: profile.github_url,
       postCount: user.posts.count,
       learnCount: learn_posts.count,
       likedCount: user.likes.count,

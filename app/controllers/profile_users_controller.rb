@@ -14,6 +14,7 @@ class ProfileUsersController < ApplicationController
       email: user.email,
       bio: profile.bio,
       avatarUrl: profile.avatar.attached? ? url_for(profile.avatar) : nil,
+      githubUrl: profile.github_url,
       postCount: user.posts.count,
       post: user.posts.order(created_at: :desc).map do |post| {
         id: post.id,
