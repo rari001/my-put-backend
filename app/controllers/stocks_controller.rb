@@ -8,7 +8,11 @@ class StocksController < ApplicationController
   end
 
   def index
-    stocked_posts = current_user.stocks.includes(:post).map { |stock| stock.post }
+    stocked_posts = Post.joins(:stocks)
+                        .where(stocks: { user_id: current_user.id })
+                        .includes(:user, user: :profile)
+                        .order(created_at: :desc)
+
     render json: stocked_posts.map { |post|
       {
         id: post.id,
