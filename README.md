@@ -25,7 +25,7 @@ https://github.com/kurumi-program/tech-put-react
 ・パスワードリセット（メール送信）  
 ・ゲストユーザーログイン/ログアウト  
 
-**投稿**
+**投稿**  
 ・投稿一覧取得  
 ・投稿作成/編集  
 ・投稿削除  
@@ -39,7 +39,7 @@ https://github.com/kurumi-program/tech-put-react
 ストックの状態取得  
 ストックの追加/削除  
 
-**投稿記事へのコメント**
+**投稿記事へのコメント**  
 コメントの状態取得  
 コメント作成  
 コメント編集  
@@ -50,11 +50,11 @@ https://github.com/kurumi-program/tech-put-react
 ・編集  
 （ユーザー名、自己紹介、GitHub URL）  
 
-**プロファイルの管理**
+**プロファイルの管理**  
 ・プロフィール作成（存在すれば状態の取得）/編集  
-（ユーザー名、自己紹介、githuburlの登録ができる）
+（ユーザー名、自己紹介、githuburlの登録ができる）  
 
-**リレーション**
+**リレーション**  
 ユーザーへのフォロー/アンフォロー  
 フォロー・フォロワー一覧の取得  
 
@@ -71,7 +71,7 @@ https://github.com/kurumi-program/tech-put-react
 投稿のキーワード検索  
 ユーザー検索  
 
-## 🛠 使用技術・ライブラリ  
+## 🛠 使用技術・ライブラリ
 **フレームワーク**  
 ・言語  
 ・Ruby 3.2.2  
@@ -90,10 +90,10 @@ https://github.com/kurumi-program/tech-put-react
 **環境変数管理**  
 ・dotenv-rails  
 
-**ファイルアップロード**
+**ファイルアップロード**  
 ・Active Storage  
 
-**セキュリティ**
+**セキュリティ**  
 ・rack-cors  
 
 ## 🌐 デプロイ/インフラ構成
@@ -106,10 +106,10 @@ https://github.com/kurumi-program/tech-put-react
 **メディアストレージ**  
 ・Cloudinary  
 
-**メール送信**
+**メール送信**  
 ・Gmail SMTP  
 
-## 👀 今後の機能追加予定  
+## 👀 今後の機能追加予定
 ・Googleログイン認証  
 ・下書き  
 ・チャット  
