@@ -10,10 +10,10 @@ https://tech-put.com/
 
 ### ★詳細
 **⚫︎Qiita記事（諸々まとまっています）**  
-現在作成中〜  
+https://qiita.com/kurumi-program/items/3bca0854d4cd81399745
 
 **⚫︎twitter**  
-まだ投稿はしてません。  
+https://x.com/kurumi_program/status/1921518493540774358 
 
 **⚫︎フロントエンド情報**  
 https://github.com/kurumi-program/tech-put-react
@@ -113,6 +113,12 @@ https://github.com/kurumi-program/tech-put-react
 ・Googleログイン認証  
 ・下書き  
 ・チャット  
+・Googleログイン認証  
+・下書き  
+・学習機能の充実  
+・チャット  
+・タグ付け  
+・退会処理  
 
 追加要望あれば、以下までお願いします！    
 techput.app@gmail.com  
