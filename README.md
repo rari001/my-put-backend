@@ -96,6 +96,11 @@ https://github.com/kurumi-program/tech-put-react
 **セキュリティ**  
 ・rack-cors  
 
+**【ER図】**  
+
+![techput-er](https://github.com/user-attachments/assets/a11e9bf4-84ff-4948-9f5f-0c1916ae9623)
+
+
 ## 🌐 デプロイ・インフラ構成
 **アプリケーションホスティング**  
 ・Render.com  
