@@ -1,17 +1,4 @@
-# TechPut -Rails Backend-
-
-## 📝 サービス概要
-TechPutという、日々学習したことをアウトプットしたい時に気軽に投稿、共有できるサービスのAPIです。
-
-### ★URL
-https://tech-put.com/
-
-### ★詳細
-**⚫︎Qiita記事（諸々まとまっています）**  
-https://qiita.com/kurumi-program/items/3bca0854d4cd81399745
-
-**⚫︎twitter**  
-https://x.com/kurumi_program/status/1921518493540774358 
+# MyPut -Rails Backend-
 
 **⚫︎フロントエンド情報**  
 https://github.com/kurumi-program/tech-put-react
