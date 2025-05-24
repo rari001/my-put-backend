@@ -1,6 +1,4 @@
 # TechPut -Rails Backend-
-![techput-api](https://github.com/user-attachments/assets/06197b88-93dc-46eb-9456-605572cd7566)
-`rails` `ruby` `postgresql` `devise` `render` `cloudinary`
 
 ## 📝 サービス概要
 TechPutという、日々学習したことをアウトプットしたい時に気軽に投稿、共有できるサービスのAPIです。
@@ -96,11 +94,6 @@ https://github.com/kurumi-program/tech-put-react
 **セキュリティ**  
 ・rack-cors  
 
-**【ER図】**  
-
-![techput-er](https://github.com/user-attachments/assets/a11e9bf4-84ff-4948-9f5f-0c1916ae9623)
-
-
 ## 🌐 デプロイ・インフラ構成
 **アプリケーションホスティング**  
 ・Render.com  
@@ -124,6 +117,3 @@ https://github.com/kurumi-program/tech-put-react
 ・チャット  
 ・タグ付け  
 ・退会処理  
-
-追加要望あれば、以下までお願いします！    
-techput.app@gmail.com  
