@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "https://my-put-backend.onrender.com"
+    origins "https://my-put-frontend.onrender.com"
 
     resource "*",
       headers: :any,
